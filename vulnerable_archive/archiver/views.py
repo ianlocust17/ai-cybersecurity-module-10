@@ -1,4 +1,5 @@
 import datetime
+import os
 from datetime import timezone
 
 import jwt
@@ -205,28 +206,29 @@ def export_summary(request):
         summary_content = query_llm(content_prompt)
 
         # Prompt for LLM to determine filename
-        path_prompt = f"""
+        filename_prompt = f"""
         Generate a filename for a summary about '{topic}'.
         The user suggested: '{filename_hint}'.
-        Return ONLY the full file path.
-        Base directory is: ./exported_summaries/
+        Return ONLY a filename and do not return any other formats than a ".txt".
         """
-        file_path = query_llm(path_prompt).strip()
+        file_name = query_llm(filename_prompt).strip()
 
         # Clean up if LLM wraps in quotes or code blocks
-        if "```" in file_path:
+        if "```" in file_name:
             import re
 
-            match = re.search(r"```(?:\w+)?\s*(.*?)\s*```", file_path, re.DOTALL)
+            match = re.search(r"```(?:\w+)?\s*(.*?)\s*```", file_name, re.DOTALL)
             if match:
-                file_path = match.group(1).strip()
+                file_name = match.group(1).strip()
             else:
                 # Fallback if regex fails or structure is weird
-                parts = file_path.split("```")
+                parts = file_name.split("```")
                 if len(parts) > 1:
-                    file_path = parts[1].strip()
+                    file_name = parts[1].strip()
 
-        file_path = file_path.strip("'\"")
+        file_name = file_name.strip("'\"")
+        base_dir = "./exported_summaries/"
+        file_path = os.path.join(base_dir, file_name)
 
         try:
             with open(file_path, "w") as f:
