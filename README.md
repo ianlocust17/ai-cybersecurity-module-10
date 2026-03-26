@@ -1,3 +1,5 @@
+!!! Enviromental Variables Must Be set for this to work !!!
+
 # Vulnerable Archive - Security Demo App
 
 This is a **deliberately vulnerable** Django application designed to demonstrate both traditional web vulnerabilities and emerging risks associated with Large Language Model (LLM) integrations.
