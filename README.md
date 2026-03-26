@@ -1,4 +1,5 @@
 !!! Enviromental variables must be set for this to work !!!
+I placed them in the docker compose
 
 # Vulnerable Archive - Security Demo App
 
