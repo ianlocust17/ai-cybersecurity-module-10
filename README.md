@@ -1,4 +1,4 @@
-!!! Enviromental Variables Must Be set for this to work !!!
+!!! Enviromental variables must be set for this to work !!!
 
 # Vulnerable Archive - Security Demo App
 
