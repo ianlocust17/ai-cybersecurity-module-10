@@ -5,6 +5,8 @@ services:
       - "8000:8000"
     environment:
       - OLLAMA_HOST=http://ollama-mod10:11434
+      - DJANGO_SECRET_KEY=django-insecure-^3!*dt2xq2vs7+5%)j2&ii@h6tz5sq@mtkji--%2c!4ye2$lhm
+      - JWT_SECRET_KEY=do_not_share_this	
     volumes:
       # Mount the notes directory to persist the database
       - ./vulnerable_archive:/app/vulnerable_archive
